@@ -39,7 +39,6 @@ const MegaMenu = () => {
                   height={300}
                   className="w-full h-48 object-contain mb-2"
                 />
-                <h3 className="text-lg font-medium">{product.title}</h3>
               </div>
             </Link>
           ))}
