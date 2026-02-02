@@ -2,7 +2,7 @@ import Link from "next/link";
 
 const MegaMenu = async () => {
   const res = await fetch("https://fakestoreapi.com/products?limit=8", {
-    next: { revalidate: 60 },
+    cache: "no-store",
   });
 
   if (!res.ok) {
