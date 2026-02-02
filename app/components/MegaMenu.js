@@ -1,0 +1,40 @@
+import Link from "next/link";
+
+const MegaMenu = async () => {
+  const products = await fetch(
+    "https://fakestoreapi.com/products?limit=8",
+  ).then((res) => res.json());
+
+  return (
+    <main className="max-w-7xl mx-auto p-6">
+      <div className="bg-blue-100 rounded-lg p-6 mb-12 text-center">
+        <h1 className="text-4xl font-bold mb-2">Welcome to our store!</h1>
+        <p className="text-gray-700">Featured products just for you</p>
+      </div>
+      <section>
+        <h2 className="text-2xl font-bold mb-6">Featured Products</h2>
+        <Link
+          href="products"
+          className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6"
+        >
+          {products.map((product) => (
+            <div
+              key={product.id}
+              className="border border-gray-300 rounded-lg p-4 hover:shadow-lg transition"
+            >
+              <img
+                src={product.image}
+                alt={product.title}
+                width={300}
+                height={300}
+                className="w-full h-48 object-contain mb-2"
+              />
+            </div>
+          ))}
+        </Link>
+      </section>
+    </main>
+  );
+};
+
+export default MegaMenu;
