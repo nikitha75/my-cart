@@ -1,6 +1,8 @@
 import ProductCard from "../components/ProductCard";
 import { getProducts } from "../lib/getProducts";
 
+export const revalidate = 60;
+
 const ProductListing = async () => {
   const products = await getProducts();
 
