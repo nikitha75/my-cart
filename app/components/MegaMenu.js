@@ -1,9 +1,14 @@
 import Link from "next/link";
 
 const MegaMenu = async () => {
-  const products = await fetch(
-    "https://fakestoreapi.com/products?limit=8",
-  ).then((res) => res.json());
+  const products = await fetch("https://fakestoreapi.com/products?limit=8", {
+    next: { revalidate: 60 },
+  });
+
+  if (!res.ok) {
+    console.warn("Failed to fetch products");
+    return <p>Unable to load products</p>;
+  }
 
   return (
     <main className="max-w-7xl mx-auto p-6">
