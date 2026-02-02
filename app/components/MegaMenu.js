@@ -30,7 +30,7 @@ const MegaMenu = () => {
         <h2 className="text-2xl font-bold mb-6">Featured Products</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
           {products.map((product) => (
-            <Link key={product.id} href={`/products/${product.id}`}>
+            <Link key={product.id} href="/products">
               <div className="border border-gray-300 rounded-lg p-4 hover:shadow-lg transition">
                 <img
                   src={product.image}
