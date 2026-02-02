@@ -1,16 +1,24 @@
+"use client";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 
-const MegaMenu = async () => {
-  const res = await fetch("https://fakestoreapi.com/products?limit=8", {
-    cache: "no-store",
-  });
+const MegaMenu = () => {
+  const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-  if (!res.ok) {
-    console.warn("Failed to fetch products");
-    return <p>Unable to load products</p>;
-  }
+  useEffect(() => {
+    fetch("https://fakestoreapi.com/products?limit=8")
+      .then((res) => res.json())
+      .then((data) => setProducts(data))
+      .catch((err) => {
+        console.error("Failed to fetch products:", err);
+        setProducts([]);
+      })
+      .finally(() => setLoading(false));
+  }, []);
 
-  const products = await res.json();
+  if (loading) return <p>Loading products...</p>;
+  if (!products.length) return <p>Unable to load products</p>;
 
   return (
     <main className="max-w-7xl mx-auto p-6">
@@ -31,6 +39,7 @@ const MegaMenu = async () => {
                   height={300}
                   className="w-full h-48 object-contain mb-2"
                 />
+                <h3 className="text-lg font-medium">{product.title}</h3>
               </div>
             </Link>
           ))}
