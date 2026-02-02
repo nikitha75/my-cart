@@ -7,14 +7,20 @@ const MegaMenu = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch("https://fakestoreapi.com/products?limit=8")
-      .then((res) => res.json())
-      .then((data) => setProducts(data))
-      .catch((err) => {
+    const fetchProducts = async () => {
+      try {
+        const res = await fetch("https://fakestoreapi.com/products?limit=8");
+        const data = await res.json();
+        setProducts(data);
+      } catch (err) {
         console.error("Failed to fetch products:", err);
         setProducts([]);
-      })
-      .finally(() => setLoading(false));
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchProducts();
   }, []);
 
   if (loading) return <p>Loading products...</p>;
